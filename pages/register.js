@@ -69,9 +69,9 @@ function Register() {
   }
   return (
     <>
-      {errorUser && <ErrorUser />}
-      {errorPassword && <ErrorPassword />}
-      {errorLength && <ErrorLength />}
+      {errorUser && <ErrorUser setErrorUser={setErrorUser}/>}
+      {errorPassword && <ErrorPassword setErrorPassword={setErrorPassword}/>}
+      {errorLength && <ErrorLength setErrorLength={setErrorLength}/>}
 
 
       <Head>
