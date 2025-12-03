@@ -5,12 +5,18 @@ import icon from '../public/icon4.svg'
 import Head from 'next/head'
 import axios from 'axios'
 import { useRouter } from 'next/router'
+import ErrorUser from './components/errorUser'
+import ErrorPassword from './components/errorPassword'
+import ErrorLength from './components/errorLength'
 function Register() {
   const router = useRouter()
   const [username, SetUsername] = useState("")
   const [password, SetPassword] = useState("")
   const [password2, SetPassword2] = useState("")
   const [success, setSuccess] = useState(false)
+  const [errorUser, setErrorUser] = useState(false)
+  const [errorPassword, setErrorPassword] = useState(false)
+  const [errorLength, setErrorLength] = useState(false)
 
   useEffect(() => {
     const token = document.cookie
@@ -21,7 +27,18 @@ function Register() {
   }, [success])
 
   const postHandeler = () => {
-    if (3 <= username.length && 6 <= password.length && password === password2) {
+    if (password.length < 6) {
+      setErrorLength(true)
+      setTimeout(() => {
+        setErrorLength(false)
+      }, 10000)
+
+    } else if (password !== password2) {
+      setErrorPassword(true)
+      setTimeout(() => {
+        setErrorPassword(false)
+      }, 10000)
+    } else  {
       axios.post("http://localhost:3000/auth/register", { username, password })
         .then((res) => {
           console.log(res)
@@ -30,17 +47,33 @@ function Register() {
               .then((res) => {
                 if (res.data.token) {
                   console.log(res.data.token)
-                  document.cookie = `token=${res.data.token}; max-age=600; `
+                  document.cookie = `token=${res.data.token}; max-age=6; `
                   setSuccess(true)
                 }
               }
               )
           }
+        }).catch((error) => {
+          console.log("errrrrrror")
+          SetUsername("")
+          SetPassword("")
+          SetPassword2("")
+          setErrorUser(true)
+          setTimeout(() => {
+            setError(false)
+
+
+          }, 10000)
         })
     }
   }
   return (
     <>
+      {errorUser && <ErrorUser />}
+      {errorPassword && <ErrorPassword />}
+      {errorLength && <ErrorLength />}
+
+
       <Head>
         <title> WAREHOUSE | REGISTER</title>
         <meta name="description" content="warehouse website" />
@@ -51,9 +84,9 @@ function Register() {
             <Image src={icon} className='size-10' alt='icon' />
             <h1 className='text-3xl text-[#282828] font-bold'>Register</h1>
           </div>
-          <input onChange={(e) => SetUsername(e.target.value)} className='h-[53px] rounded-2xl bg-[#F2F2F2] m-2.5 p-[22px_15px] text-sm text-[#28282880]' placeholder='User Name:' />
-          <input onChange={(e) => SetPassword(e.target.value)} className='h-[53px] rounded-2xl bg-[#F2F2F2] m-2.5 p-[22px_15px] text-sm text-[#28282880]' placeholder='Password:' />
-          <input onChange={(e) => SetPassword2(e.target.value)} className='h-[53px] rounded-2xl bg-[#F2F2F2] m-2.5 p-[22px_15px] text-sm text-[#28282880]' placeholder='Reapid Password' />
+          <input value={username} type='text' onChange={(e) => SetUsername(e.target.value)} className='h-[53px] rounded-2xl bg-[#F2F2F2] m-2.5 p-[22px_15px] text-sm text-[#28282880]' placeholder='User Name:' />
+          <input value={password} type='password' onChange={(e) => SetPassword(e.target.value)} className='h-[53px] rounded-2xl bg-[#F2F2F2] m-2.5 p-[22px_15px] text-sm text-[#28282880]' placeholder='Password:' />
+          <input value={password2} type='password' onChange={(e) => SetPassword2(e.target.value)} className='h-[53px] rounded-2xl bg-[#F2F2F2] m-2.5 p-[22px_15px] text-sm text-[#28282880]' placeholder='Confirm Password' />
           <button onClick={() => postHandeler()} className='text-center w-[400px] h-[53px] rounded-2xl  m-2.5 p-2.5 bg-[#55A3F0] font-semibold text-xl text-[#FFFFFF] cursor-pointer'>Sign Up</button>
           <span className=' font-normal text-[1rem] mt-6  text-center  text-[#3A8BED]'>
             <Link href="/login">
