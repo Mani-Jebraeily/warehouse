@@ -47,7 +47,7 @@ function Register() {
               .then((res) => {
                 if (res.data.token) {
                   console.log(res.data.token)
-                  document.cookie = `token=${res.data.token}; max-age=6; `
+                  document.cookie = `token=${res.data.token}; max-age=600; `
                   setSuccess(true)
                 }
               }
