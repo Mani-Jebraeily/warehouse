@@ -54,7 +54,6 @@ function Register() {
               )
           }
         }).catch((error) => {
-          console.log("errrrrrror")
           SetUsername("")
           SetPassword("")
           SetPassword2("")
