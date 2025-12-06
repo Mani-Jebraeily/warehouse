@@ -8,6 +8,7 @@ import axios from 'axios'
 // import CreateModal from './modules/createModal'
 // import CreateModal from './compone'
 import CreateModal from '../modules/createModal'
+import DeleteModal from '../modules/deleteModal'
 import { useRouter } from 'next/router'
 
 
@@ -15,8 +16,11 @@ function Main({ deleteTokenHandeler }) {
   const [products, setProducts] = useState([])
   const [productsCounter, setProductsCounter] = useState([])
   const [showCreate, setShowCreate] = useState(false)
+  const [showDelete, setShowDelete] = useState(false)
+  const [showEdit, setShowEdit] = useState(false)
   const [pagination, setPagination] = useState(1)
   const [refresh,setRefresh]=useState(0)
+  const [selectedId, setSelectedId] = useState(null)
   const maxPagination = Math.ceil(productsCounter.length / 10)
   const router = useRouter()
   // const token = document.cookie
@@ -53,6 +57,9 @@ function Main({ deleteTokenHandeler }) {
   return (
     <>
       {showCreate && <CreateModal setShowCreate={setShowCreate} setRefresh={setRefresh}  refresh={refresh}/>}
+      {showDelete && <DeleteModal setShowDelete={setShowDelete} setRefresh={setRefresh} selectedId={selectedId} refresh={refresh}/>}
+      {showDelete && <DeleteModal setShowDelete={setShowDelete} setRefresh={setRefresh} selectedId={selectedId} refresh={refresh}/>}
+
 
 
 
@@ -90,8 +97,11 @@ function Main({ deleteTokenHandeler }) {
               return (<>
                 <tr key={p.id} className=' *:basis-64 [&>td:first-child]:basis-32'>
                   <td className='flex  basis-32 justify-around'>
-                    <Image src={deleteIcon} alt='icon' />
-                    <Image src={editIcon} alt='icon' />
+                    <Image onClick={()=>{
+                      setSelectedId(p.id)
+                      setShowDelete(true)
+                      }} src={deleteIcon} alt='icon' className='cursor-pointer' />
+                    <Image src={editIcon} alt='icon' className='cursor-pointer'/>
                   </td>
                   <td className=' text-center'>{p.id}</td>
                   <td className=' text-center'>{p.price}</td>
