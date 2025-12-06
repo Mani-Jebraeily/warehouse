@@ -8,30 +8,63 @@ import axios from 'axios'
 // import CreateModal from './modules/createModal'
 // import CreateModal from './compone'
 import CreateModal from '../modules/createModal'
+import { useRouter } from 'next/router'
 
-function Main({deleteTokenHandeler}) {
+
+function Main({ deleteTokenHandeler }) {
   const [products, setProducts] = useState([])
-  useEffect(() => {
-    axios.get("http://localhost:3000/products")
-      .then((res) => setProducts([...res.data.data]))
-  }, [])
-  console.log(products)
+  const [productsCounter, setProductsCounter] = useState([])
+  const [showCreate, setShowCreate] = useState(false)
+  const [pagination, setPagination] = useState(1)
+  const [refresh,setRefresh]=useState(0)
+  const maxPagination = Math.ceil(productsCounter.length / 10)
+  const router = useRouter()
+  // const token = document.cookie
 
-  
+
+  useEffect(() => {
+    axios.get("http://localhost:3000/products?page=1&limit=1000")
+      .then((res) => setProductsCounter([...res.data.data]))
+      .then(() => console.log(productsCounter))
+
+    axios.get(`http://localhost:3000/products?page=${pagination}&limit=10`)
+      .then((res) => setProducts([...res.data.data]))
+      .then(() => console.log(productsCounter))
+  }, [pagination,refresh])
+
+
+  const testToken = () => {
+    // if (!token) {
+    //   router.push("/login")
+    // }
+    // console.log("111")
+  }
+
+  setTimeout(() => {
+    testToken()
+  },610000)
+
+
+
+
+
+
 
   return (
     <>
+      {showCreate && <CreateModal setShowCreate={setShowCreate} setRefresh={setRefresh}  refresh={refresh}/>}
 
-      <div className=' flex flex-col justify-center items-center w-screen h-fit bg-gray-50'>
-        {/* <div className='flex w-[80vw] bg-blue-300'> */}
+
+
+      <div className=' flex flex-col justify-center items-center w-screen h-fit pb-30 bg-gray-50'>
         <div className=' w-[80vw] flex justify-between mt-10'>
           <div className='flex gap-5 items-center'>
             <Image src={manageIcon} alt='icon' />
             <h2 className='font-normal text-2xl text-[#282828]'>Product Management</h2>
           </div>
           <div className='flex gap-5 justify-center items-center'>
-            <Image onClick={()=>deleteTokenHandeler()} src={exitIcon} className='size-10 bg-red-300 cursor-pointer rounded-xl ' alt='icon exit' />
-            <button className='w-[132px] h-[45px] rounded-xl text-white bg-[#55A3F0] cursor-pointer'>Add Product</button>
+            <Image onClick={() => deleteTokenHandeler()} src={exitIcon} className='size-10 bg-red-300 cursor-pointer rounded-xl ' alt='icon exit' />
+            <button onClick={() => setShowCreate(true)} className='w-[132px] h-[45px] rounded-xl text-white bg-[#55A3F0] cursor-pointer'>Add Product</button>
 
           </div>
 
@@ -42,7 +75,7 @@ function Main({deleteTokenHandeler}) {
 
 
         <table class="table-auto rounded-4xl r ounded-[30px_30px_0px_0px] rou nded-2xl  mt-10 w-[80vw] overflow-hidden">
-          <thead className=' flex justify-center  rounded-2xl h-[70px] bg-[#F2F2F2] text-sm font-medium text-[#282828]'>
+          <thead className=' flex justify-center   h-[70px] bg-[#F2F2F2] text-sm font-medium text-[#282828]'>
             <tr className='flex justify-around    w-[80vw] items-center'>
               <th className=' basis-32'>   </th>
               <th className=' basis-64'  >ID</th>
@@ -75,13 +108,34 @@ function Main({deleteTokenHandeler}) {
           </tbody>
         </table>
 
+        <div className='flex gap-5 mt-5'>
+          {maxPagination > pagination ?
+            <button onClick={() => setPagination(pagination + 1)} className='bg-blue-200 size-8 rounded-full cursor-pointer ' >{`<`}</button>
 
-        {/* </div> */}
+            :
+            <button className='bg-blue-200 size-8 rounded-full cursor-not-allowed   ' >{`<`}</button>
+
+          }
+          <h2 className='font-normal text-2xl text-[#282828]'>{pagination}</h2>
+
+
+          {pagination > 1 ?
+            <button onClick={() => setPagination(pagination - 1)} className='bg-blue-200 size-8 rounded-full cursor-pointer ' >{`>`}</button>
+            :
+            <button className='bg-blue-200 size-8 rounded-full cursor-not-allowed   ' >{`>`}</button>
+
+          }
+
+
+
+
+        </div>
+
+
 
       </div>
-      <CreateModal/>
 
-      
+
     </>
   )
 }
