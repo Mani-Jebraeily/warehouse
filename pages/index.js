@@ -7,14 +7,13 @@ import Main from './components/template/main.js'
 
 
 function Index() {
-  const [success, setSuccess] = useState(false)
   const router = useRouter()
   useEffect(() => {
     const token = document.cookie
     if (!token) {
       router.push("/login")
     }
-  }, [success])
+  }, [])
 
   const deleteTokenHandeler = () => {
     document.cookie = `token=0; Expires=Thu, 01 Jan 1970 00:00:01 GMT `

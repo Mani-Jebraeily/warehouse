@@ -66,10 +66,10 @@ function Main({ deleteTokenHandeler }) {
 
 
       <div className=' flex flex-col justify-center items-center w-screen h-fit pb-30 bg-gray-50'>
-        <div className=' w-[80vw] flex justify-between mt-10'>
-          <div className='flex gap-5 items-center'>
+        <div className=' w-[80vw] flex  justify-between mt-10'>
+          <div className='flex gap-1 sm:gap-5 items-center'>
             <Image src={manageIcon} alt='icon' />
-            <h2 className='font-normal text-2xl text-[#282828]'>Product Management</h2>
+            <h2 className='font-normal text-[10px] sm:text-2xl text-[#282828]'>Product Management</h2>
           </div>
           <div className='flex gap-5 justify-center items-center'>
             <Image onClick={() => deleteTokenHandeler()} src={exitIcon} className='size-10 bg-red-300 cursor-pointer rounded-xl ' alt='icon exit' />
@@ -80,80 +80,80 @@ function Main({ deleteTokenHandeler }) {
         </div>
 
 
+        <div className="mt-10 w-[80vw] overflow-x-auto rounded-4xl">
+          <table className="min-w-[720px] w-full table-auto border-collapse">
+            <thead className="bg-[#F2F2F2] h-[70px] text-sm font-medium text-[#282828]">
+              <tr>
+                <th className="w-64 text-center">Product Name</th>
+                <th className="w-64 text-center">Quantity</th>
+                <th className="w-64 text-center">Price</th>
+                <th className="w-64 text-center">ID</th>
+                <th className="w-32"></th>
+              </tr>
+            </thead>
 
+            <tbody className="bg-white text-sm">
+              {products.map((p) => (
+                <tr key={p.id} className="h-15 border-b border-[#F2F2F2]">
 
-
-        <table class="table-auto rounded-4xl      mt-10 w-[80vw]  overflow-hidden">
-          <thead className=' flex justify-center   h-[70px] bg-[#F2F2F2] text-sm font-medium text-[#282828]'>
-            <tr className='flex justify-around    w-[80vw] items-center'>
-              <th className=' basis-32'>   </th>
-              <th className=' basis-64'  >ID</th>
-              <th className=' basis-64'>Price</th>
-              <th className=' basis-64'>Quantity</th>
-              <th className=' basis-64'>Product Name</th>
-            </tr>
-          </thead>
-          <tbody className='flex flex-col justify-between bg-[#FFFFFF] *:h-15 *:border-b-[#F2F2F2] *:border-b *:flex *:justify-between *:items-center '>
-
-            {products.map((p) => {
-              return (<>
-                <tr key={p.id} className=' *:basis-64 [&>td:first-child]:basis-32'>
-                  <td className='flex  basis-32 justify-around'>
-
-                    <Image onClick={() => {
-                      setSelectedId(p.id)
-                      setShowDelete(true)
-                    }} src={deleteIcon} alt='icon' className='cursor-pointer' />
-
-                    <Image onClick={() => {
-                      setSelectedId(p.id)
-                      setShowEdit(true)
-
-                    }} src={editIcon} alt='icon' className='cursor-pointer' />
+                  <td className="w-64 text-center whitespace-nowrap">
+                    {p.name}
                   </td>
-                  <td className=' text-center'>{p.id}</td>
-                  <td className=' text-center'>{p.price}</td>
-                  <td className=' text-center'>{p.quantity}</td>
-                  <td className=' text-center'>{p.name}</td>
+
+                  <td className="w-64 text-center whitespace-nowrap">
+                    {p.quantity}
+                  </td>
+
+                  <td className="w-64 text-center whitespace-nowrap">
+                    {p.price}
+                  </td>
+
+                  <td className="w-64 text-center whitespace-nowrap">
+                    {p.id}
+                  </td>
+
+                  <td className="w-64 lg:w-32">
+                    <div className="flex justify-around">
+                      <Image
+                        onClick={() => {
+                          setSelectedId(p.id)
+                          setShowEdit(true)
+                        }}
+                        src={editIcon}
+                        alt="edit"
+                        className="cursor-pointer"
+                      />
+                      <Image
+                        onClick={() => {
+                          setSelectedId(p.id)
+                          setShowDelete(true)
+                        }}
+                        src={deleteIcon}
+                        alt="delete"
+                        className="cursor-pointer"
+                      />
+                    </div>
+                  </td>
+
                 </tr>
-
-              </>)
-
-
-            })}
-
-
-          </tbody>
-        </table>
-
+              ))}
+            </tbody>
+          </table>
+        </div>
         <div className='flex gap-5 mt-5'>
           {maxPagination > pagination ?
             <button onClick={() => setPagination(pagination + 1)} className='bg-blue-200 size-8 rounded-full cursor-pointer ' >{`<`}</button>
-
             :
             <button className='bg-blue-200 size-8 rounded-full cursor-not-allowed   ' >{`<`}</button>
-
           }
           <h2 className='font-normal text-2xl text-[#282828]'>{pagination}</h2>
-
-
           {pagination > 1 ?
             <button onClick={() => setPagination(pagination - 1)} className='bg-blue-200 size-8 rounded-full cursor-pointer ' >{`>`}</button>
             :
             <button className='bg-blue-200 size-8 rounded-full cursor-not-allowed   ' >{`>`}</button>
-
           }
-
-
-
-
         </div>
-
-
-
       </div>
-
-
     </>
   )
 }
