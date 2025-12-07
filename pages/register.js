@@ -78,7 +78,7 @@ function Register() {
         <meta name="description" content="warehouse website" />
       </Head>
       <div className='flex flex-col gap-10 justify-center items-center w-screen h-screen bg-[#F7F8F8]'>
-        <div className='flex flex-col justify-center items-center w-[460px]  *:w-[400px] h-fit p-[60px_0px] [596px]  bg-[#FFFFFF] border border-[#E4E4E4] rounded-2xl'>
+        <div className='flex flex-col justify-center items-center  w-[90vw] sm:w-[460px]  *:w-[80vw] *:sm:w-[400px] h-fit p-[60px_0px] [596px]  bg-[#FFFFFF] border border-[#E4E4E4] rounded-2xl'>
           <div className='flex gap-3 justify-start mb-5 w-[400px]'>
             <Image src={icon} className='size-10' alt='icon' />
             <h1 className='text-3xl text-[#282828] font-bold'>Register</h1>

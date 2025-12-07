@@ -7,7 +7,7 @@ function GitHub() {
     return (
         <>
             <Link  target='_blank'  href="https://github.com/Mani-Jebraeily" className='cursor-pointer' >
-                <Image src={gitHubIcon} className='size-10  fixed bottom-10 left-10' />
+                <Image src={gitHubIcon} className='size-10  fixed bottom-2 left-2 sm:bottom-10 sm:left-10' />
             </Link>
         </>
     )

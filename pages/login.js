@@ -48,15 +48,15 @@ function Login() {
 
 
       {errorLogin&&<ErrorLogin setErrorLogin={setErrorLogin}/>}
-      <div className='flex flex-col gap-10 justify-center items-center w-screen h-screen bg-[#F7F8F8]'>
-        <div className='flex flex-col justify-center items-center w-[460px]  *:w-[400px] h-fit p-[60px_0px] [596px]  bg-[#FFFFFF] border border-[#E4E4E4] rounded-2xl'>
+      <div className='flex flex-col gap-10 justify-center items-center w-screen h-screen bg-[#F7F8F8] '>
+        <div className='flex flex-col justify-center items-center w-[90vw] sm:w-[460px]  *:h-[53px]  *:sm:w-[400px]  *:w-[80vw] h-fit p-[60px_0px]   bg-[#FFFFFF] border border-[#E4E4E4] rounded-2xl'>
           <div className='flex gap-3 justify-start mb-5 w-[400px]'>
             <Image src={icon} className='size-10' />
             <h1 className='text-3xl text-[#282828] font-bold'>Login</h1>
           </div>
-          <input value={username} onChange={(e) => SetUsername(e.target.value)} className='h-[53px] rounded-2xl bg-[#F2F2F2] m-2.5 p-[22px_15px] text-sm text-[#28282880]' placeholder='User Name:' />
+          <input value={username} onChange={(e) => SetUsername(e.target.value)} className=' rounded-2xl bg-[#F2F2F2] m-2.5 p-[22px_15px] text-sm text-[#28282880]' placeholder='User Name:' />
           <input value={password} type='password' onChange={(e) => SetPassword(e.target.value)} className='h-[53px] rounded-2xl bg-[#F2F2F2] m-2.5 p-[22px_15px] text-sm text-[#28282880]' placeholder='Password:' />
-          <button onClick={() => postHandeler()} className='text-center w-[400px] h-[53px] rounded-2xl  m-2.5 p-2.5 bg-[#55A3F0] font-semibold text-xl text-[#FFFFFF] cursor-pointer'>Login</button>
+          <button onClick={() => postHandeler()} className='flex justify-center items-center text-center w-[400px] h-[53px] rounded-2xl   m-2.5 p-2.5 bg-[#55A3F0] font-semibold text-[16px]  sm:text-xl text-[#FFFFFF] cursor-pointer'>Login</button>
           <span className=' font-normal text-[1rem] mt-6  text-center  text-[#3A8BED]'>
             <Link href="/register">
               You dont Have an account?
