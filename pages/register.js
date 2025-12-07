@@ -59,7 +59,7 @@ function Register() {
           SetPassword2("")
           setErrorUser(true)
           setTimeout(() => {
-            setError(false)
+            setErrorUser(false)
 
 
           }, 10000)
