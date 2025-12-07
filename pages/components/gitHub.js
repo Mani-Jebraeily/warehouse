@@ -1,0 +1,16 @@
+import React from 'react'
+import gitHubIcon from '../../public/gitHub.svg'
+import Image from 'next/image'
+import Link from 'next/link'
+
+function GitHub() {
+    return (
+        <>
+            <Link  target='_blank'  href="https://github.com/Mani-Jebraeily" className='cursor-pointer' >
+                <Image src={gitHubIcon} className='size-10  fixed bottom-10 left-10' />
+            </Link>
+        </>
+    )
+}
+
+export default GitHub

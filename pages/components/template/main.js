@@ -47,7 +47,6 @@ function Main({ deleteTokenHandeler }) {
     if (token) {
       router.push("/login")
     }
-    console.log("تست کوکی")
   }
 
 
@@ -58,6 +57,7 @@ function Main({ deleteTokenHandeler }) {
 
   return (
     <>
+
       {showCreate && <CreateModal setShowCreate={setShowCreate} setRefresh={setRefresh} refresh={refresh} />}
       {showDelete && <DeleteModal setShowDelete={setShowDelete} setRefresh={setRefresh} selectedId={selectedId} refresh={refresh} />}
       {showEdit && <EditModal setShowEdit={setShowEdit} setRefresh={setRefresh} selectedId={selectedId} refresh={refresh} />}

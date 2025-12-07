@@ -46,6 +46,7 @@ function Login() {
         <meta name="description" content="warehouse website" />
       </Head>
 
+
       {errorLogin&&<ErrorLogin setErrorLogin={setErrorLogin}/>}
       <div className='flex flex-col gap-10 justify-center items-center w-screen h-screen bg-[#F7F8F8]'>
         <div className='flex flex-col justify-center items-center w-[460px]  *:w-[400px] h-fit p-[60px_0px] [596px]  bg-[#FFFFFF] border border-[#E4E4E4] rounded-2xl'>
