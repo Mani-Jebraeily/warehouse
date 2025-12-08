@@ -3,9 +3,6 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import Main from './components/template/main.js'
 
-
-
-
 function Index() {
   const router = useRouter()
   useEffect(() => {
