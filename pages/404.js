@@ -1,3 +1,4 @@
+import { redirect } from 'next/dist/server/api-utils'
 import React from 'react'
 
 function NotFound() {
@@ -7,3 +8,9 @@ function NotFound() {
 }
 
 export default NotFound
+
+export async function getStaticProps(){
+    return{
+        redirect:{destination:"/login"}
+    }
+}
