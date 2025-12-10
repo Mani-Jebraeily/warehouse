@@ -15,17 +15,7 @@ function Login() {
   const router = useRouter()
   const [username, SetUsername] = useState("")
   const [password, SetPassword] = useState("")
-  const [success, setSuccess] = useState(false)
   const [errorLogin, setErrorLogin] = useState(false)
-  const token = getCookie("token")
-
-  useEffect(() => {
-    // console.log(token)
-    // const token = document.cookie
-    if (token) {
-      router.push("/")
-    }
-  }, [success])
 
   const postHandeler = () => {
     axios.post(`${api}/auth/login`, { username, password })
@@ -33,7 +23,8 @@ function Login() {
         if (res.data.token) {
           console.log(res.data.token)
           document.cookie = `token=${res.data.token}; max-age=600; `
-          setSuccess(true)
+          router.push("/")
+
         }
       }).catch((error) => {
         setErrorLogin(true)
@@ -76,16 +67,16 @@ function Login() {
 
 export default Login
 
-export async function getStaticProps(){
-  // const token = document.cookie("token")
-  const token = getCookie("token")
 
-
-
-  const dsdass="ss"
+export async function getServerSideProps(ctx){
+  const token=ctx.req.headers.cookie?.includes("token=")
+  if(token){
+    return{
+      redirect:{destination:"/",permanent:false}
+    }
+  }
   console.log(token)
     return{
-      props:{dsdass}
-        // redirect:{destination:"/login"}
+      props:{}
     }
 }
