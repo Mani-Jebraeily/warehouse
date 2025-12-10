@@ -7,22 +7,28 @@ import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import ErrorLogin from './components/errorLogin'
+import { getCookie } from 'cookies-next'
+
 
 function Login() {
+  const api = process.env.NEXT_PUBLIC_API_URL
   const router = useRouter()
   const [username, SetUsername] = useState("")
   const [password, SetPassword] = useState("")
   const [success, setSuccess] = useState(false)
   const [errorLogin, setErrorLogin] = useState(false)
+  const token = getCookie("token")
+
   useEffect(() => {
-    const token = document.cookie
+    // console.log(token)
+    // const token = document.cookie
     if (token) {
       router.push("/")
     }
   }, [success])
 
   const postHandeler = () => {
-    axios.post("http://localhost:3000/auth/login", { username, password })
+    axios.post(`${api}/auth/login`, { username, password })
       .then((res) => {
         if (res.data.token) {
           console.log(res.data.token)
@@ -69,3 +75,17 @@ function Login() {
 }
 
 export default Login
+
+export async function getStaticProps(){
+  // const token = document.cookie("token")
+  const token = getCookie("token")
+
+
+
+  const dsdass="ss"
+  console.log(token)
+    return{
+      props:{dsdass}
+        // redirect:{destination:"/login"}
+    }
+}

@@ -26,7 +26,6 @@ function EditModal({ setShowEdit, selectedId,setRefresh,refresh }) {
         setQuantity(res.data.quantity)
       })
       .catch((error) => {
-        console.log(error)
         setShowEdit(false)
       })
 

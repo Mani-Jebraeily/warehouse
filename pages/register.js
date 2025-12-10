@@ -9,6 +9,7 @@ import ErrorUser from './components/errorUser'
 import ErrorPassword from './components/errorPassword'
 import ErrorLength from './components/errorLength'
 function Register() {
+  const api = process.env.NEXT_PUBLIC_API_URL
   const router = useRouter()
   const [username, SetUsername] = useState("")
   const [password, SetPassword] = useState("")
@@ -17,15 +18,7 @@ function Register() {
   const [errorUser, setErrorUser] = useState(false)
   const [errorPassword, setErrorPassword] = useState(false)
   const [errorLength, setErrorLength] = useState(false)
-
-  useEffect(() => {
-    const token = document.cookie
-    if (token) {
-      router.push("/")
-    }
-    console.log(token)
-  }, [success])
-
+ 
   const postHandeler = () => {
     if (password.length < 6) {
       setErrorLength(true)
@@ -39,11 +32,11 @@ function Register() {
         setErrorPassword(false)
       }, 10000)
     } else  {
-      axios.post("http://localhost:3000/auth/register", { username, password })
+      axios.post(`${api}/auth/register`, { username, password })
         .then((res) => {
           console.log(res)
           if (res.status === 201) {
-            axios.post("http://localhost:3000/auth/login", { username, password })
+            axios.post(`${api}/auth/login`, { username, password })
               .then((res) => {
                 if (res.data.token) {
                   console.log(res.data.token)
@@ -99,3 +92,17 @@ function Register() {
 }
 
 export default Register
+
+
+export async function getServerSideProps(ctx){
+  const token=ctx.req.headers.cookie?.includes("token=")
+  if(token){
+    return{
+      redirect:{destination:"/",permanent:false}
+    }
+  }
+  console.log(token)
+    return{
+      props:{}
+    }
+}

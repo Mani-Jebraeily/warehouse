@@ -31,7 +31,7 @@ function Main({ deleteTokenHandeler }) {
 
 
   useEffect(() => {
-    console.log(api)
+    testToken()
     setShowCreate(false)
     setShowDelete(false)
     setShowEdit(false)
@@ -44,7 +44,7 @@ function Main({ deleteTokenHandeler }) {
 
 
   const testToken = () => {
-    if (token) {
+    if (!token) {
       router.push("/login")
     }
   }
