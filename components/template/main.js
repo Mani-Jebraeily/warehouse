@@ -33,57 +33,59 @@ function Main({ deleteTokenHandeler }) {
 
 
 
-  // useEffect(() => {
-  //   testToken()
-  //   setShowCreate(false)
-  //   setShowDelete(false)
-  //   setShowEdit(false)
-  //   axios.get(`${api}/products?page=1&limit=1000`)
-  //     .then((res) => setProductsCounter([...res.data.data]))
-
-  //   axios.get(`${api}/products?page=${pagination}&limit=10`)
-  //     .then((res) => setProducts([...res.data.data]))
-  // }, [pagination, refresh])
-
-  // useEffect(() => {
-  //   testToken()
-  //   setShowCreate(false)
-  //   setShowDelete(false)
-  //   setShowEdit(false)
-  //   axios.get(`${api}/products?page=1&limit=1000`)
-  //     .then((res) => setProductsCounter([...res.data.data]))
-
-  //   axios.get(`${api}/products?page=${pagination}&limit=10`)
-  //     .then((res) => setProducts([...res.data.data]))
-  // }, [pagination, refresh])
-
   useEffect(() => {
     testToken()
     setShowCreate(false)
     setShowDelete(false)
     setShowEdit(false)
-   
     axios.get(`${api}/products?page=1&limit=1000`)
       .then((res) => setProductsCounter([...res.data.data]))
 
-       if (pagination > 1&&products.length === 0) {
-        setPagination(pagination - 1)
-        console.log("tamam")
-    }
-
     axios.get(`${api}/products?page=${pagination}&limit=10`)
       .then((res) => setProducts([...res.data.data]))
-      .catch((error)=>console.log(error))
+      .catch((error) => {
+        console.log(error)
+        if (pagination > 1) {
+          setPagination(pagination - 1)
+
+        }
+      })
   }, [pagination, refresh])
 
-  const HandelPagination=()=>{
-     // setPagination(2)
-    if (pagination > 1&&products.length === 0) {
-        setPagination(pagination - 1)
-        console.log("tamam")
-    }
-  }
-HandelPagination()
+
+  //  final
+
+  // useEffect(() => {
+  //   testToken()
+  //   setShowCreate(false)
+  //   setShowDelete(false)
+  //   setShowEdit(false)
+
+  //   axios.get(`${api}/products?page=1&limit=1000`)
+  //     .then((res) => setProductsCounter([...res.data.data]))
+
+  //      if (pagination > 1&&products.length === 0) {
+  //       setPagination(pagination - 1)
+  //       console.log("tamam")
+  //   }
+
+  //   axios.get(`${api}/products?page=${pagination}&limit=10`)
+  //     .then((res) => setProducts([...res.data.data]))
+  //     .catch((error)=>{
+  //       setPagination(pagination - 1)
+  //     })
+  // }, [pagination, refresh])
+
+
+
+
+
+
+
+
+
+
+
 
 
   const testToken = () => {
@@ -102,7 +104,7 @@ HandelPagination()
     <>
 
       {showCreate && <CreateModal setShowCreate={setShowCreate} setRefresh={setRefresh} refresh={refresh} />}
-      {showDelete && <DeleteModal pagination={pagination} setShowDelete={setShowDelete} setRefresh={setRefresh} selectedId={selectedId} refresh={refresh} />}
+      {showDelete && <DeleteModal setShowDelete={setShowDelete} setRefresh={setRefresh} selectedId={selectedId} refresh={refresh} />}
       {showEdit && <EditModal setShowEdit={setShowEdit} setRefresh={setRefresh} selectedId={selectedId} refresh={refresh} />}
 
 
