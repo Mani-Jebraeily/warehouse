@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
-import manageIcon from '../../../public/manage.svg'
-import editIcon from '../../../public/edit.svg'
-import deleteIcon from '../../../public/trash.svg'
-import exitIcon from "../../../public/icon3.svg"
+import manageIcon from '../../public/manage.svg'
+import editIcon from '../../public/edit.svg'
+import deleteIcon from '../../public/trash.svg'
+import exitIcon from "../../public/icon3.svg"
 import axios from 'axios'
 import CreateModal from '../modules/createModal'
 import DeleteModal from '../modules/deleteModal'
@@ -33,24 +33,64 @@ function Main({ deleteTokenHandeler }) {
 
 
 
+  // useEffect(() => {
+  //   testToken()
+  //   setShowCreate(false)
+  //   setShowDelete(false)
+  //   setShowEdit(false)
+  //   axios.get(`${api}/products?page=1&limit=1000`)
+  //     .then((res) => setProductsCounter([...res.data.data]))
+
+  //   axios.get(`${api}/products?page=${pagination}&limit=10`)
+  //     .then((res) => setProducts([...res.data.data]))
+  // }, [pagination, refresh])
+
+  // useEffect(() => {
+  //   testToken()
+  //   setShowCreate(false)
+  //   setShowDelete(false)
+  //   setShowEdit(false)
+  //   axios.get(`${api}/products?page=1&limit=1000`)
+  //     .then((res) => setProductsCounter([...res.data.data]))
+
+  //   axios.get(`${api}/products?page=${pagination}&limit=10`)
+  //     .then((res) => setProducts([...res.data.data]))
+  // }, [pagination, refresh])
+
   useEffect(() => {
-    // testToken()
+    testToken()
     setShowCreate(false)
     setShowDelete(false)
     setShowEdit(false)
+   
     axios.get(`${api}/products?page=1&limit=1000`)
       .then((res) => setProductsCounter([...res.data.data]))
 
+       if (pagination > 1&&products.length === 0) {
+        setPagination(pagination - 1)
+        console.log("tamam")
+    }
+
     axios.get(`${api}/products?page=${pagination}&limit=10`)
       .then((res) => setProducts([...res.data.data]))
+      .catch((error)=>console.log(error))
   }, [pagination, refresh])
 
+  const HandelPagination=()=>{
+     // setPagination(2)
+    if (pagination > 1&&products.length === 0) {
+        setPagination(pagination - 1)
+        console.log("tamam")
+    }
+  }
+HandelPagination()
 
-  // const testToken = () => {
-  //   if (!token) {
-  //     router.push("/login")
-  //   }
-  // }
+
+  const testToken = () => {
+    if (!token) {
+      router.push("/login")
+    }
+  }
 
 
 
@@ -62,7 +102,7 @@ function Main({ deleteTokenHandeler }) {
     <>
 
       {showCreate && <CreateModal setShowCreate={setShowCreate} setRefresh={setRefresh} refresh={refresh} />}
-      {showDelete && <DeleteModal setShowDelete={setShowDelete} setRefresh={setRefresh} selectedId={selectedId} refresh={refresh} />}
+      {showDelete && <DeleteModal pagination={pagination} setShowDelete={setShowDelete} setRefresh={setRefresh} selectedId={selectedId} refresh={refresh} />}
       {showEdit && <EditModal setShowEdit={setShowEdit} setRefresh={setRefresh} selectedId={selectedId} refresh={refresh} />}
 
 
@@ -164,9 +204,3 @@ function Main({ deleteTokenHandeler }) {
 export default Main
 
 
-export async function getServerSideProps(ctx) {
-
-  return {
-    props: {}
-  }
-}

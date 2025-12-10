@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
-import plusIcon from '../../../public/plus.svg'
+import plusIcon from '../../public/plus.svg'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import ErrorFill from '../errorFill'
@@ -17,7 +17,6 @@ function CreateModal({ setShowCreate, setRefresh, refresh }) {
     const [price, setPrice] = useState(1)
     const [quantity, setQuantity] = useState(1)
     const [showError, setShowError] = useState(false)
-    console.log(token)
 
     useEffect(() => {
         if (!token) {

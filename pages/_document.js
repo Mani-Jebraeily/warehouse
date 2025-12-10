@@ -1,5 +1,5 @@
 import { Html, Head, Main, NextScript } from "next/document";
-import GitHub from "./components/gitHub";
+import GitHub from "../components/gitHub";
 
 export default function Document() {
   return (

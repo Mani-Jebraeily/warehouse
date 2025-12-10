@@ -9,8 +9,8 @@ function NotFound() {
 
 export default NotFound
 
-export async function getStaticProps(){
-    return{
-        redirect:{destination:"/login"}
-    }
-}
+// export async function getStaticProps(){
+//     return{
+//         redirect:{destination:"/login"}
+//     }
+// }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
-import EditIcon from '../../../public/edit-info.svg'
+import EditIcon from '../../public/edit-info.svg'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import ErrorFill from '../errorFill'

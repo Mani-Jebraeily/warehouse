@@ -1,5 +1,6 @@
 import React from 'react'
-import gitHubIcon from '../../public/gitHub.svg'
+// import gitHubIcon from '../../public/gitHub.svg'
+import gitHubIcon from '../public/gitHub.svg'
 import Image from 'next/image'
 import Link from 'next/link'
 

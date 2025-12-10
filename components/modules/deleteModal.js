@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import Icon from '../../../public/Close.svg'
+import Icon from '../../public/Close.svg'
 import Image from 'next/image'
 import axios from 'axios'
 import { useRouter } from 'next/router'
@@ -34,6 +34,7 @@ function DeleteModal({ setShowDelete, refresh, setRefresh, selectedId }) {
 
       })
       .catch((error) => {
+        console.log(error)
         router.push("/login")
       })
 

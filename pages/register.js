@@ -5,9 +5,9 @@ import icon from '../public/icon4.svg'
 import Head from 'next/head'
 import axios from 'axios'
 import { useRouter } from 'next/router'
-import ErrorUser from './components/errorUser'
-import ErrorPassword from './components/errorPassword'
-import ErrorLength from './components/errorLength'
+import ErrorUser from '../components/errorUser'
+import ErrorPassword from '../components/errorPassword'
+import ErrorLength from '../components/errorLength'
 function Register() {
   const api = process.env.NEXT_PUBLIC_API_URL
   const router = useRouter()

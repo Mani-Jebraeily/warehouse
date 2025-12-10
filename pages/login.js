@@ -6,7 +6,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import ErrorLogin from './components/errorLogin'
+import ErrorLogin from '../components/errorLogin'
 import { getCookie } from 'cookies-next'
 
 
@@ -21,7 +21,7 @@ function Login() {
     axios.post(`${api}/auth/login`, { username, password })
       .then((res) => {
         if (res.data.token) {
-          console.log(res.data.token)
+          // console.log(res.data.token)
           document.cookie = `token=${res.data.token}; max-age=600; `
           router.push("/")
 
