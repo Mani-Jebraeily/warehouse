@@ -94,15 +94,4 @@ function Register() {
 export default Register
 
 
-export async function getServerSideProps(ctx){
-  const token=ctx.req.headers.cookie?.includes("token=")
-  if(token){
-    return{
-      redirect:{destination:"/",permanent:false}
-    }
-  }
-  console.log(token)
-    return{
-      props:{}
-    }
-}
+// 

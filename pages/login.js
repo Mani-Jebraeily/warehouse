@@ -68,15 +68,4 @@ function Login() {
 export default Login
 
 
-export async function getServerSideProps(ctx){
-  const token=ctx.req.headers.cookie?.includes("token=")
-  if(token){
-    return{
-      redirect:{destination:"/",permanent:false}
-    }
-  }
-  console.log(token)
-    return{
-      props:{}
-    }
-}
+// 

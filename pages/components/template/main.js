@@ -5,8 +5,6 @@ import editIcon from '../../../public/edit.svg'
 import deleteIcon from '../../../public/trash.svg'
 import exitIcon from "../../../public/icon3.svg"
 import axios from 'axios'
-// import CreateModal from './modules/createModal'
-// import CreateModal from './compone'
 import CreateModal from '../modules/createModal'
 import DeleteModal from '../modules/deleteModal'
 import EditModal from '../modules/editModal'
@@ -30,8 +28,13 @@ function Main({ deleteTokenHandeler }) {
   // const token = document.cookie
 
 
+
+
+
+
+
   useEffect(() => {
-    testToken()
+    // testToken()
     setShowCreate(false)
     setShowDelete(false)
     setShowEdit(false)
@@ -43,11 +46,11 @@ function Main({ deleteTokenHandeler }) {
   }, [pagination, refresh])
 
 
-  const testToken = () => {
-    if (!token) {
-      router.push("/login")
-    }
-  }
+  // const testToken = () => {
+  //   if (!token) {
+  //     router.push("/login")
+  //   }
+  // }
 
 
 
@@ -159,3 +162,11 @@ function Main({ deleteTokenHandeler }) {
 }
 
 export default Main
+
+
+export async function getServerSideProps(ctx) {
+
+  return {
+    props: {}
+  }
+}
