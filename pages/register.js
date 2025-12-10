@@ -8,6 +8,8 @@ import { useRouter } from 'next/router'
 import ErrorUser from '../components/errorUser'
 import ErrorPassword from '../components/errorPassword'
 import ErrorLength from '../components/errorLength'
+import { getCookie } from 'cookies-next'
+
 function Register() {
   const api = process.env.NEXT_PUBLIC_API_URL
   const router = useRouter()
@@ -18,6 +20,16 @@ function Register() {
   const [errorUser, setErrorUser] = useState(false)
   const [errorPassword, setErrorPassword] = useState(false)
   const [errorLength, setErrorLength] = useState(false)
+  const token = getCookie("token")
+  
+
+
+  useEffect(()=>{
+    if(token){
+      router.push("/")
+    }
+
+  },[success])
  
   const postHandeler = () => {
     if (password.length < 6) {
@@ -34,12 +46,10 @@ function Register() {
     } else  {
       axios.post(`${api}/auth/register`, { username, password })
         .then((res) => {
-          console.log(res)
           if (res.status === 201) {
             axios.post(`${api}/auth/login`, { username, password })
               .then((res) => {
                 if (res.data.token) {
-                  console.log(res.data.token)
                   document.cookie = `token=${res.data.token}; max-age=600; `
                   setSuccess(true)
                 }

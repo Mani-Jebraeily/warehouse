@@ -21,7 +21,6 @@ function Login() {
     axios.post(`${api}/auth/login`, { username, password })
       .then((res) => {
         if (res.data.token) {
-          // console.log(res.data.token)
           document.cookie = `token=${res.data.token}; max-age=600; `
           router.push("/")
 

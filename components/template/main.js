@@ -12,7 +12,7 @@ import { useRouter } from 'next/router'
 import { getCookie } from 'cookies-next'
 
 
-function Main({ deleteTokenHandeler }) {
+function Main({ deleteTokenHandeler}) {
   const api = process.env.NEXT_PUBLIC_API_URL
   const token = getCookie("token")
   const [products, setProducts] = useState([])
@@ -25,19 +25,13 @@ function Main({ deleteTokenHandeler }) {
   const [selectedId, setSelectedId] = useState(null)
   const maxPagination = Math.ceil(productsCounter.length / 10)
   const router = useRouter()
-  // const token = document.cookie
-
-
-
-
-
-
 
   useEffect(() => {
     testToken()
     setShowCreate(false)
     setShowDelete(false)
     setShowEdit(false)
+
     axios.get(`${api}/products?page=1&limit=1000`)
       .then((res) => setProductsCounter([...res.data.data]))
 
@@ -47,45 +41,9 @@ function Main({ deleteTokenHandeler }) {
         console.log(error)
         if (pagination > 1) {
           setPagination(pagination - 1)
-
         }
       })
   }, [pagination, refresh])
-
-
-  //  final
-
-  // useEffect(() => {
-  //   testToken()
-  //   setShowCreate(false)
-  //   setShowDelete(false)
-  //   setShowEdit(false)
-
-  //   axios.get(`${api}/products?page=1&limit=1000`)
-  //     .then((res) => setProductsCounter([...res.data.data]))
-
-  //      if (pagination > 1&&products.length === 0) {
-  //       setPagination(pagination - 1)
-  //       console.log("tamam")
-  //   }
-
-  //   axios.get(`${api}/products?page=${pagination}&limit=10`)
-  //     .then((res) => setProducts([...res.data.data]))
-  //     .catch((error)=>{
-  //       setPagination(pagination - 1)
-  //     })
-  // }, [pagination, refresh])
-
-
-
-
-
-
-
-
-
-
-
 
 
   const testToken = () => {
@@ -95,20 +53,12 @@ function Main({ deleteTokenHandeler }) {
   }
 
 
-
-
-
-
-
   return (
     <>
 
       {showCreate && <CreateModal setShowCreate={setShowCreate} setRefresh={setRefresh} refresh={refresh} />}
       {showDelete && <DeleteModal setShowDelete={setShowDelete} setRefresh={setRefresh} selectedId={selectedId} refresh={refresh} />}
       {showEdit && <EditModal setShowEdit={setShowEdit} setRefresh={setRefresh} selectedId={selectedId} refresh={refresh} />}
-
-
-
 
       <div className=' flex flex-col justify-center items-center w-screen h-fit pb-30 bg-gray-50'>
         <div className=' w-[80vw] flex  justify-between mt-10'>
