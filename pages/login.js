@@ -26,6 +26,7 @@ function Login() {
 
         }
       }).catch((error) => {
+        console.log(error,"login error")
         setErrorLogin(true)
         setTimeout(() => {
           setErrorLogin(false)

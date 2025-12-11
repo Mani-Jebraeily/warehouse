@@ -48,7 +48,7 @@ function EditModal({ setShowEdit, selectedId,setRefresh,refresh }) {
         // setQuantity(0)
         setRefresh(refresh + 1)
         // setShowEdit(false)
-      }).catch((error) => console.log(error))
+      }).catch((error) => router.push("/login"))
     } else {
       setShowError(true)
       setTimeout(() => {

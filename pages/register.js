@@ -30,6 +30,7 @@ function Register() {
     }
 
   },[success])
+
  
   const postHandeler = () => {
     if (password.length < 6) {
@@ -46,6 +47,7 @@ function Register() {
     } else  {
       axios.post(`${api}/auth/register`, { username, password })
         .then((res) => {
+          console.log(res,"register 201")
           if (res.status === 201) {
             axios.post(`${api}/auth/login`, { username, password })
               .then((res) => {
@@ -57,6 +59,7 @@ function Register() {
               )
           }
         }).catch((error) => {
+          console.log(error,"error register")
           SetUsername("")
           SetPassword("")
           SetPassword2("")

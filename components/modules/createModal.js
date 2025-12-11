@@ -42,7 +42,9 @@ function CreateModal({ setShowCreate, setRefresh, refresh }) {
                 setQuantity(0)
                 setShowCreate(false)
                 setRefresh(refresh + 1)
-            }).catch((error) => console.log(error))
+            }).catch((error) => {
+                console.log(error,"error create modal")
+                router.push("/login")})
         } else {
             setShowError(true)
             setTimeout(() => {
