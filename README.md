@@ -1,40 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Warehouse Management Frontend (Next.js)
 
-## Getting Started
+A frontend simulation of a warehouse management system built with **Next.js**.  
+This project integrates with a real backend API that was initially provided as a local project and I manually deployed  on a Node.js hosting environment.  
+The frontend itself is deployed on **Vercel** and available as a live demo.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🌐 Live Demo
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Frontend (Vercel):**
+https://warehouse-rho-ashy.vercel.app/login
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+**Backend API (Live):**
+http://maniword.ir
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+---
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+## 📦 Project Overview
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project is a warehouse management simulation that allows users to:
 
-## Learn More
+- Add new products  
+- Edit products  
+- Delete products  
+- View products with pagination  
 
-To learn more about Next.js, take a look at the following resources:
+The frontend is built using **Next.js** and styled with **Tailwind CSS**.  
+All data operations are handled through a live backend API.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🧠 Purpose of This Project
 
-## Deploy on Vercel
+This project was built to:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Practice real-world frontend development with a real backend
+- Deploy and consume a backend API in a production-like environment
+- Deploy a Next.js application on Vercel
+- Implement proper CRUD operations
+- Handle frontend pagination logic
+- Gain hands-on experience with Node.js backend deployment and hosting
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+- Next.js  
+- Tailwind CSS  
+- React Hooks  
+- Vercel (Deployment)
+
+### Backend
+- Node.js  
+- Self-hosted on a Node.js environment  
+- REST API  
+
+---
+
+## 🔗 Backend Repository
+
+https://github.com/Mani-Jebraeily/api-warehouse
+
+---
+
+## ✨ Features
+
+- Product listing  
+- Add product  
+- Edit product  
+- Delete product  
+- Client-side pagination  
+- Responsive UI with Tailwind CSS  
+- Live frontend & backend deployment  
+
+---
