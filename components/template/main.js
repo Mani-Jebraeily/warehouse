@@ -12,18 +12,17 @@ import { useRouter } from 'next/router'
 import { getCookie } from 'cookies-next'
 
 
-function Main({ deleteTokenHandeler}) {
+function Main({ deleteTokenHandeler }) {
   const api = process.env.NEXT_PUBLIC_API_URL
   const token = getCookie("token")
   const [products, setProducts] = useState([])
-  const [productsCounter, setProductsCounter] = useState([])
   const [showCreate, setShowCreate] = useState(false)
   const [showDelete, setShowDelete] = useState(false)
   const [showEdit, setShowEdit] = useState(true)
   const [pagination, setPagination] = useState(1)
   const [refresh, setRefresh] = useState(0)
   const [selectedId, setSelectedId] = useState(null)
-  const maxPagination = Math.ceil(productsCounter.length / 10)
+  const [maxPagination,setMaxPagination]=useState(0) 
   const router = useRouter()
 
   useEffect(() => {
@@ -32,11 +31,15 @@ function Main({ deleteTokenHandeler}) {
     setShowDelete(false)
     setShowEdit(false)
 
-    axios.get(`${api}/products?page=1&limit=1000`)
-      .then((res) => setProductsCounter([...res.data.data]))
+    if(products.length===0&&pagination>1){
+      setMaxPagination(pagination - 1)
+    }
 
     axios.get(`${api}/products?page=${pagination}&limit=10`)
-      .then((res) => setProducts([...res.data.data]))
+      .then((res) => {
+        setProducts([...res.data.data])
+        setMaxPagination(res.data.totalPages)
+      })
       .catch((error) => {
         console.log(error)
         if (pagination > 1) {
