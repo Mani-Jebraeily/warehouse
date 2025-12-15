@@ -9,6 +9,7 @@ import ErrorUser from '../components/errorUser'
 import ErrorPassword from '../components/errorPassword'
 import ErrorLength from '../components/errorLength'
 import { getCookie } from 'cookies-next'
+import Loader from '@/components/modules/loader'
 
 function Register() {
   const api = process.env.NEXT_PUBLIC_API_URL
@@ -20,18 +21,19 @@ function Register() {
   const [errorUser, setErrorUser] = useState(false)
   const [errorPassword, setErrorPassword] = useState(false)
   const [errorLength, setErrorLength] = useState(false)
+  const [loading, setLoading] = useState(false)
   const token = getCookie("token")
-  
 
 
-  useEffect(()=>{
-    if(token){
+
+  useEffect(() => {
+    if (token) {
       router.push("/")
     }
 
-  },[success])
+  }, [success])
 
- 
+
   const postHandeler = () => {
     if (password.length < 6) {
       setErrorLength(true)
@@ -44,10 +46,11 @@ function Register() {
       setTimeout(() => {
         setErrorPassword(false)
       }, 10000)
-    } else  {
+    } else {
+      setLoading(true)
       axios.post(`${api}/auth/register`, { username, password })
         .then((res) => {
-          console.log(res,"register 201")
+          console.log(res, "register 201")
           if (res.status === 201) {
             axios.post(`${api}/auth/login`, { username, password })
               .then((res) => {
@@ -59,7 +62,8 @@ function Register() {
               )
           }
         }).catch((error) => {
-          console.log(error,"error register")
+          console.log(error, "error register")
+          setLoading(false)
           SetUsername("")
           SetPassword("")
           SetPassword2("")
@@ -74,9 +78,10 @@ function Register() {
   }
   return (
     <>
-      {errorUser && <ErrorUser setErrorUser={setErrorUser}/>}
-      {errorPassword && <ErrorPassword setErrorPassword={setErrorPassword}/>}
-      {errorLength && <ErrorLength setErrorLength={setErrorLength}/>}
+      {loading && <Loader />}
+      {errorUser && <ErrorUser setErrorUser={setErrorUser} />}
+      {errorPassword && <ErrorPassword setErrorPassword={setErrorPassword} />}
+      {errorLength && <ErrorLength setErrorLength={setErrorLength} />}
 
 
       <Head>

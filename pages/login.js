@@ -8,6 +8,8 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import ErrorLogin from '../components/errorLogin'
 import { getCookie } from 'cookies-next'
+import Loader from '@/components/modules/loader'
+
 
 
 function Login() {
@@ -16,35 +18,45 @@ function Login() {
   const [username, SetUsername] = useState("")
   const [password, SetPassword] = useState("")
   const [errorLogin, setErrorLogin] = useState(false)
+  const [loading, setLoading] = useState(false)
+
 
   const postHandeler = () => {
-    axios.post(`${api}/auth/login`, { username, password })
-      .then((res) => {
-        if (res.data.token) {
-          document.cookie = `token=${res.data.token}; max-age=600; `
-          router.push("/")
+    if (username, password) {
+      setLoading(true)
 
-        }
-      }).catch((error) => {
-        console.log(error,"login error")
-        setErrorLogin(true)
-        setTimeout(() => {
-          setErrorLogin(false)
-        }, 10000)
+      axios.post(`${api}/auth/login`, { username, password })
+        .then((res) => {
+          if (res.data.token) {
+            document.cookie = `token=${res.data.token}; max-age=600; `
+            router.push("/")
 
-      })
+          }
+        }).catch((error) => {
+          setLoading(false)
+
+          console.log(error, "login error")
+          setErrorLogin(true)
+          setTimeout(() => {
+            setErrorLogin(false)
+          }, 10000)
+
+        })
+    }
   }
 
 
   return (
     <>
+      {loading && <Loader />}
+
       <Head>
         <title> WAREHOUSE | LOGIN</title>
         <meta name="description" content="warehouse website" />
       </Head>
 
 
-      {errorLogin&&<ErrorLogin setErrorLogin={setErrorLogin}/>}
+      {errorLogin && <ErrorLogin setErrorLogin={setErrorLogin} />}
       <div className='flex flex-col gap-10 justify-center items-center w-screen h-screen bg-[#F7F8F8] '>
         <div className='flex flex-col justify-center items-center w-[90vw] sm:w-[460px]  *:h-[53px]  *:sm:w-[400px]  *:w-[80vw] h-fit p-[60px_0px]   bg-[#FFFFFF] border border-[#E4E4E4] rounded-2xl'>
           <div className='flex gap-3 justify-start mb-5 w-[400px]'>

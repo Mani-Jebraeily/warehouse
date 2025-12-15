@@ -49,10 +49,7 @@ function DeleteModal({ setShowDelete, refresh, setRefresh, selectedId }) {
             <button onClick={() => setShowDelete(false)} className='w-40 h-10 bg-[#DFDFDF] p-2.5 rounded-xl font-semibold text-lg text-[#282828CC] cursor-pointer flex justify-center items-center'>Cancel</button>
             <button onClick={deleteHandeler} className='w-40 h-10 bg-[#F43F5E] p-2.5 rounded-xl font-semibold text-lg  text-[#FFFFFF] cursor-pointer flex justify-center items-center'>Delete</button>
           </div>
-
-
         </div>
-
       </div>
     </>
   )
