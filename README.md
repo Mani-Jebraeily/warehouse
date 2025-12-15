@@ -12,7 +12,7 @@ The frontend itself is deployed on **Vercel** and available as a live demo.
 https://warehouse-rho-ashy.vercel.app/login
 
 **Backend API (Live):**
-http://maniword.ir
+https://maniword.ir
 
 ---
 
