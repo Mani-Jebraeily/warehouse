@@ -10,7 +10,9 @@ import DeleteModal from '../modules/deleteModal'
 import EditModal from '../modules/editModal'
 import { useRouter } from 'next/router'
 import { getCookie } from 'cookies-next'
+import { createContext } from 'react'
 
+export const MainContext = createContext()
 
 function Main({ deleteTokenHandeler }) {
   const api = process.env.NEXT_PUBLIC_API_URL
@@ -22,7 +24,7 @@ function Main({ deleteTokenHandeler }) {
   const [pagination, setPagination] = useState(1)
   const [refresh, setRefresh] = useState(0)
   const [selectedId, setSelectedId] = useState(null)
-  const [maxPagination,setMaxPagination]=useState(0) 
+  const [maxPagination, setMaxPagination] = useState(0)
   const router = useRouter()
 
   useEffect(() => {
@@ -31,7 +33,7 @@ function Main({ deleteTokenHandeler }) {
     setShowDelete(false)
     setShowEdit(false)
 
-    if(products.length===0&&pagination>1){
+    if (products.length === 0 && pagination > 1) {
       setMaxPagination(pagination - 1)
     }
 
@@ -59,9 +61,13 @@ function Main({ deleteTokenHandeler }) {
   return (
     <>
 
-      {showCreate && <CreateModal setShowCreate={setShowCreate} setRefresh={setRefresh} refresh={refresh} />}
-      {showDelete && <DeleteModal setShowDelete={setShowDelete} setRefresh={setRefresh} selectedId={selectedId} refresh={refresh} />}
-      {showEdit && <EditModal setShowEdit={setShowEdit} setRefresh={setRefresh} selectedId={selectedId} refresh={refresh} />}
+      <MainContext.Provider value={{ setShowCreate, setRefresh, refresh, setShowDelete, selectedId, setShowEdit }}>
+        {showCreate && <CreateModal/>}
+        {showDelete && <DeleteModal/>}
+        {showEdit && <EditModal/>}
+      </MainContext.Provider>
+
+
 
       <div className=' flex flex-col justify-center items-center w-screen h-fit pb-30 bg-gray-50'>
         <div className=' w-[80vw] flex  justify-between mt-10'>

@@ -4,8 +4,15 @@ import Image from 'next/image'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { getCookie } from 'cookies-next'
+import { MainContext } from '../template/main'
+import { useContext } from 'react'
 
-function DeleteModal({ setShowDelete, refresh, setRefresh, selectedId }) {
+
+
+// function DeleteModal({ setShowDelete, refresh, setRefresh, selectedId }) {
+function DeleteModal() {
+    const { setShowDelete, refresh, setRefresh, selectedId }=useContext(MainContext)
+
   // const [, token] = document.cookie.split("=")
   const api = process.env.NEXT_PUBLIC_API_URL
   const token = getCookie("token")

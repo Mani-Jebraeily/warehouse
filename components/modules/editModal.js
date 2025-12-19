@@ -5,8 +5,13 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 import ErrorFill from '../errorFill'
 import { getCookie } from 'cookies-next'
+import { useContext } from 'react'
+import { MainContext } from '../template/main'
 
-function EditModal({ setShowEdit, selectedId,setRefresh,refresh }) {
+// function EditModal({ setShowEdit, selectedId, setRefresh, refresh }) {
+function EditModal() {
+  const { setShowEdit, selectedId, setRefresh, refresh } = useContext(MainContext)
+
   const api = process.env.NEXT_PUBLIC_API_URL
   const router = useRouter()
   const [name, setName] = useState("")
